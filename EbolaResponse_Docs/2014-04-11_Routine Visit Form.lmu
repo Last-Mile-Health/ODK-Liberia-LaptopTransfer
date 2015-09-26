@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<h:html xmlns:h="http://www.w3.org/1999/xhtml" xmlns:orx="http://openrosa.org/jr/xforms" xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:vellum="http://commcarehq.org/xforms/vellum">
+	<h:head>
+		<h:title>CHW: Routine Visit Form</h:title>
+		<model>
+			<instance>
+				<data xmlns:jrm="http://dev.commcarehq.org/jr/xforms" xmlns="http://openrosa.org/formdesigner/D7D6D47C-3E83-474C-892E-F027A0273A23" uiVersion="1" version="1" name="CHW: Routine Visit Form">
+					<LMD-TABLE />
+					<LMD-DAT-AutoDate />
+					<LMD-VAL-CHWID />
+					<LMD-VAL-VillageID />
+					<LMD-VAL-HouseholdID />
+					<LMD-VAL-NumberOfBirths />
+					<LMD-GRP-tbl_data_odk_birth jr:template="">
+						<LABEL-BirthRoutine />
+						<LMD-VAL-MemberID />
+						<LMD-VAL-FirstName />
+						<LMD-VAL-LastName />
+						<LMD-VAL-Gender />
+						<LMD-DAT-DoB />
+					</LMD-GRP-tbl_data_odk_birth>
+					<LMD-VAL-NumberOfDeaths />
+					<LMD-GRP-tbl_data_odk_death jr:template="">
+						<LABEL-DeathRoutine />
+						<LMD-VAL-MemberID />
+						<LMD-VAL-FirstName />
+						<LMD-VAL-LastName />
+						<LMD-VAL-Gender />
+						<LMD-DAT-DateOfDeath />
+						<LMD-VAL-DeathLocation />
+					</LMD-GRP-tbl_data_odk_death>
+					<LMD-VAL-NumberOfMovements />
+					<LMD-GRP-tbl_data_odk_movement jr:template="">
+						<LABEL-MovementRoutine />
+						<LMD-VAL-MemberID />
+						<LMD-VAL-FirstName />
+						<LMD-VAL-LastName />
+						<LMD-VAL-Gender />
+						<LMD-VAL-DateOfMovement />
+						<LMD-VAL-InOrOut />
+					</LMD-GRP-tbl_data_odk_movement>
+					<LMD-VAL_NumberOfBigBellies />
+					<LMD-VAL-NumberOfInfants />
+					<LMD-VAL-NumberOfVaccineCards />
+					<LABEL-VaccineCard />
+					<LMD-VAL-EbolaEducation />
+				</data>
+			</instance>
+			<bind nodeset="/data/LMD-TABLE" calculate="&quot;tbl_data_odk_RoutineVisitForm&quot;" />
+			<bind nodeset="/data/LMD-DAT-AutoDate" calculate="now()" />
+			<bind nodeset="/data/LMD-VAL-CHWID" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-VAL-VillageID" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-VAL-HouseholdID" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-VAL-NumberOfBirths" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_birth" relevant="/data/LMD-VAL-NumberOfBirths &gt; 0" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_birth/LABEL-BirthRoutine" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_birth/LMD-VAL-MemberID" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_birth/LMD-VAL-FirstName" type="xsd:string" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_birth/LMD-VAL-LastName" type="xsd:string" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_birth/LMD-VAL-Gender" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_birth/LMD-DAT-DoB" type="xsd:date" constraint=". &lt;= today()" required="true()" />
+			<bind nodeset="/data/LMD-VAL-NumberOfDeaths" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_death" relevant="/data/LMD-VAL-NumberOfDeaths &gt; 0" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_death/LABEL-DeathRoutine" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_death/LMD-VAL-MemberID" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_death/LMD-VAL-FirstName" type="xsd:string" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_death/LMD-VAL-LastName" type="xsd:string" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_death/LMD-VAL-Gender" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_death/LMD-DAT-DateOfDeath" type="xsd:date" constraint=". &lt;= today()" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_death/LMD-VAL-DeathLocation" required="true()" />
+			<bind nodeset="/data/LMD-VAL-NumberOfMovements" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_movement" relevant="/data/LMD-VAL-NumberOfMovements &gt; 0" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_movement/LABEL-MovementRoutine" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-MemberID" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-FirstName" type="xsd:string" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-LastName" type="xsd:string" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-Gender" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-DateOfMovement" type="xsd:date" constraint=". &lt;= today()" required="true()" />
+			<bind nodeset="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-InOrOut" required="true()" />
+			<bind nodeset="/data/LMD-VAL_NumberOfBigBellies" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-VAL-NumberOfInfants" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-VAL-NumberOfVaccineCards" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LABEL-VaccineCard" relevant="/data/LMD-VAL-NumberOfVaccineCards &gt; 0" />
+			<bind nodeset="/data/LMD-VAL-EbolaEducation" required="true()" />
+			<itext>
+				<translation lang="en" default="">
+					<text id="LMD-VAL-CHWID-label">
+						<value>CHW ID Number:</value>
+					</text>
+					<text id="LMD-VAL-VillageID-label">
+						<value>Village ID Number:</value>
+					</text>
+					<text id="LMD-VAL-HouseholdID-label">
+						<value>Household ID Number:</value>
+					</text>
+					<text id="LMD-VAL-NumberOfBirths-label">
+						<value>Number of births:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_birth-label">
+						<value>Birth Routine</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_birth/LABEL-BirthRoutine-label">
+						<value>Please enter the following information about the birth</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_birth/LMD-VAL-MemberID-label">
+						<value>Child's Member ID:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_birth/LMD-VAL-FirstName-label">
+						<value>Child's first name:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_birth/LMD-VAL-LastName-label">
+						<value>Child's last name:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_birth/LMD-VAL-Gender-label">
+						<value>Sex:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_birth/LMD-VAL-Gender-male-label">
+						<value>Male</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_birth/LMD-VAL-Gender-female-label">
+						<value>Female</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_birth/LMD-DAT-DoB-label">
+						<value>Child's Date of Birth:</value>
+					</text>
+					<text id="LMD-VAL-NumberOfDeaths-label">
+						<value>Number of deaths?</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death-label">
+						<value>Death Routine</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LABEL-DeathRoutine-label">
+						<value>Please enter the following information about the death</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-VAL-MemberID-label">
+						<value>Person's Member ID:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-VAL-FirstName-label">
+						<value>Member's first name:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-VAL-LastName-label">
+						<value>Member's last name:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-VAL-Gender-label">
+						<value>Sex:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-VAL-Gender-male-label">
+						<value>Male</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-VAL-Gender-female-label">
+						<value>Female</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-DAT-DateOfDeath-label">
+						<value>Date of Death:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-VAL-DeathLocation-label">
+						<value>Where did the death occur? </value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-VAL-DeathLocation-facility-label">
+						<value>In a facility</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-VAL-DeathLocation-community-label">
+						<value>In the community</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_death/LMD-VAL-DeathLocation-Transit-label">
+						<value>In transit</value>
+					</text>
+					<text id="LMD-VAL-NumberOfMovements-label">
+						<value>Number of movements?</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement-label">
+						<value>Movement Routine</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LABEL-MovementRoutine-label">
+						<value>Please enter the following information about the movement:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LMD-VAL-MemberID-label">
+						<value>Person's Member ID:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LMD-VAL-FirstName-label">
+						<value>Member's first name:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LMD-VAL-LastName-label">
+						<value>Member's last name:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LMD-VAL-Gender-label">
+						<value>Sex:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LMD-VAL-Gender-male-label">
+						<value>Male</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LMD-VAL-Gender-female-label">
+						<value>Female</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LMD-VAL-DateOfMovement-label">
+						<value>Date of birth:</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LMD-VAL-InOrOut-label">
+						<value>Moved in or out?</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LMD-VAL-InOrOut-movedIn-label">
+						<value>Moved in</value>
+					</text>
+					<text id="LMD-GRP-tbl_data_odk_movement/LMD-VAL-InOrOut-movedOut-label">
+						<value>Moved out</value>
+					</text>
+					<text id="LMD-VAL_NumberOfBigBellies-label">
+						<value>Number of Big Bellies? </value>
+					</text>
+					<text id="LMD-VAL-NumberOfInfants-label">
+						<value>Number of Infants (under 1)</value>
+					</text>
+					<text id="LMD-VAL-NumberOfVaccineCards-label">
+						<value>Number of vaccine cards seen?</value>
+					</text>
+					<text id="LABEL-VaccineCard-label">
+						<value>Please complete the vaccine ledger</value>
+					</text>
+					<text id="LMD-VAL-EbolaEducation-label">
+						<value>Conducted Ebola education?</value>
+					</text>
+					<text id="LMD-VAL-EbolaEducation-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="LMD-VAL-EbolaEducation-0-label">
+						<value>No</value>
+					</text>
+				</translation>
+			</itext>
+		</model>
+	</h:head>
+	<h:body>
+		<input ref="/data/LMD-VAL-CHWID">
+			<label ref="jr:itext('LMD-VAL-CHWID-label')" />
+		</input>
+		<input ref="/data/LMD-VAL-VillageID">
+			<label ref="jr:itext('LMD-VAL-VillageID-label')" />
+		</input>
+		<input ref="/data/LMD-VAL-HouseholdID">
+			<label ref="jr:itext('LMD-VAL-HouseholdID-label')" />
+		</input>
+		<input ref="/data/LMD-VAL-NumberOfBirths">
+			<label ref="jr:itext('LMD-VAL-NumberOfBirths-label')" />
+		</input>
+		<group>
+			<label ref="jr:itext('LMD-GRP-tbl_data_odk_birth-label')" />
+			<repeat jr:count="/data/LMD-VAL-NumberOfBirths" jr:noAddRemove="true()" nodeset="/data/LMD-GRP-tbl_data_odk_birth">
+				<trigger ref="/data/LMD-GRP-tbl_data_odk_birth/LABEL-BirthRoutine" appearance="minimal">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_birth/LABEL-BirthRoutine-label')" />
+				</trigger>
+				<input ref="/data/LMD-GRP-tbl_data_odk_birth/LMD-VAL-MemberID">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_birth/LMD-VAL-MemberID-label')" />
+				</input>
+				<input ref="/data/LMD-GRP-tbl_data_odk_birth/LMD-VAL-FirstName">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_birth/LMD-VAL-FirstName-label')" />
+				</input>
+				<input ref="/data/LMD-GRP-tbl_data_odk_birth/LMD-VAL-LastName">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_birth/LMD-VAL-LastName-label')" />
+				</input>
+				<select1 ref="/data/LMD-GRP-tbl_data_odk_birth/LMD-VAL-Gender">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_birth/LMD-VAL-Gender-label')" />
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_birth/LMD-VAL-Gender-male-label')" />
+						<value>male</value>
+					</item>
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_birth/LMD-VAL-Gender-female-label')" />
+						<value>female</value>
+					</item>
+				</select1>
+				<input ref="/data/LMD-GRP-tbl_data_odk_birth/LMD-DAT-DoB">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_birth/LMD-DAT-DoB-label')" />
+				</input>
+			</repeat>
+		</group>
+		<input ref="/data/LMD-VAL-NumberOfDeaths">
+			<label ref="jr:itext('LMD-VAL-NumberOfDeaths-label')" />
+		</input>
+		<group>
+			<label ref="jr:itext('LMD-GRP-tbl_data_odk_death-label')" />
+			<repeat jr:count="/data/LMD-VAL-NumberOfDeaths" jr:noAddRemove="true()" nodeset="/data/LMD-GRP-tbl_data_odk_death">
+				<trigger ref="/data/LMD-GRP-tbl_data_odk_death/LABEL-DeathRoutine" appearance="minimal">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LABEL-DeathRoutine-label')" />
+				</trigger>
+				<input ref="/data/LMD-GRP-tbl_data_odk_death/LMD-VAL-MemberID">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-VAL-MemberID-label')" />
+				</input>
+				<input ref="/data/LMD-GRP-tbl_data_odk_death/LMD-VAL-FirstName">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-VAL-FirstName-label')" />
+				</input>
+				<input ref="/data/LMD-GRP-tbl_data_odk_death/LMD-VAL-LastName">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-VAL-LastName-label')" />
+				</input>
+				<select1 ref="/data/LMD-GRP-tbl_data_odk_death/LMD-VAL-Gender">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-VAL-Gender-label')" />
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-VAL-Gender-male-label')" />
+						<value>male</value>
+					</item>
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-VAL-Gender-female-label')" />
+						<value>female</value>
+					</item>
+				</select1>
+				<input ref="/data/LMD-GRP-tbl_data_odk_death/LMD-DAT-DateOfDeath">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-DAT-DateOfDeath-label')" />
+				</input>
+				<select1 ref="/data/LMD-GRP-tbl_data_odk_death/LMD-VAL-DeathLocation">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-VAL-DeathLocation-label')" />
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-VAL-DeathLocation-facility-label')" />
+						<value>facility</value>
+					</item>
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-VAL-DeathLocation-community-label')" />
+						<value>community</value>
+					</item>
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_death/LMD-VAL-DeathLocation-Transit-label')" />
+						<value>Transit</value>
+					</item>
+				</select1>
+			</repeat>
+		</group>
+		<input ref="/data/LMD-VAL-NumberOfMovements">
+			<label ref="jr:itext('LMD-VAL-NumberOfMovements-label')" />
+		</input>
+		<group>
+			<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement-label')" />
+			<repeat jr:count="/data/LMD-VAL-NumberOfMovements" jr:noAddRemove="true()" nodeset="/data/LMD-GRP-tbl_data_odk_movement">
+				<trigger ref="/data/LMD-GRP-tbl_data_odk_movement/LABEL-MovementRoutine" appearance="minimal">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LABEL-MovementRoutine-label')" />
+				</trigger>
+				<input ref="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-MemberID">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LMD-VAL-MemberID-label')" />
+				</input>
+				<input ref="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-FirstName">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LMD-VAL-FirstName-label')" />
+				</input>
+				<input ref="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-LastName">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LMD-VAL-LastName-label')" />
+				</input>
+				<select1 ref="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-Gender">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LMD-VAL-Gender-label')" />
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LMD-VAL-Gender-male-label')" />
+						<value>male</value>
+					</item>
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LMD-VAL-Gender-female-label')" />
+						<value>female</value>
+					</item>
+				</select1>
+				<input ref="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-DateOfMovement">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LMD-VAL-DateOfMovement-label')" />
+				</input>
+				<select1 ref="/data/LMD-GRP-tbl_data_odk_movement/LMD-VAL-InOrOut">
+					<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LMD-VAL-InOrOut-label')" />
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LMD-VAL-InOrOut-movedIn-label')" />
+						<value>movedIn</value>
+					</item>
+					<item>
+						<label ref="jr:itext('LMD-GRP-tbl_data_odk_movement/LMD-VAL-InOrOut-movedOut-label')" />
+						<value>movedOut</value>
+					</item>
+				</select1>
+			</repeat>
+		</group>
+		<input ref="/data/LMD-VAL_NumberOfBigBellies">
+			<label ref="jr:itext('LMD-VAL_NumberOfBigBellies-label')" />
+		</input>
+		<input ref="/data/LMD-VAL-NumberOfInfants">
+			<label ref="jr:itext('LMD-VAL-NumberOfInfants-label')" />
+		</input>
+		<input ref="/data/LMD-VAL-NumberOfVaccineCards">
+			<label ref="jr:itext('LMD-VAL-NumberOfVaccineCards-label')" />
+		</input>
+		<trigger ref="/data/LABEL-VaccineCard" appearance="minimal">
+			<label ref="jr:itext('LABEL-VaccineCard-label')" />
+		</trigger>
+		<select1 ref="/data/LMD-VAL-EbolaEducation">
+			<label ref="jr:itext('LMD-VAL-EbolaEducation-label')" />
+			<item>
+				<label ref="jr:itext('LMD-VAL-EbolaEducation-1-label')" />
+				<value>1</value>
+			</item>
+			<item>
+				<label ref="jr:itext('LMD-VAL-EbolaEducation-0-label')" />
+				<value>0</value>
+			</item>
+		</select1>
+	</h:body>
+</h:html>

@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<h:html xmlns:h="http://www.w3.org/1999/xhtml" xmlns:orx="http://openrosa.org/jr/xforms" xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:vellum="http://commcarehq.org/xforms/vellum">
+	<h:head>
+		<h:title>FHW Supervision Report</h:title>
+		<model>
+			<instance>
+				<data xmlns:jrm="http://dev.commcarehq.org/jr/xforms" xmlns="http://openrosa.org/formdesigner/CF2CE471-249B-464C-93EB-A40C14F55F0B" uiVersion="1" version="1" name="FHW Supervision Report">
+					<Basic_Info>
+						<ODK-FHW_ID />
+						<ODK-Date />
+						<ODK-FHW_Present />
+					</Basic_Info>
+					<FHW_Not_Present>
+						<ODK-ExcusedAbsence />
+						<ODK-WarningLetter />
+						<ODK-Probation />
+						<ODK-Termination />
+					</FHW_Not_Present>
+					<FHW_Present>
+						<Population_Tracking>
+							<Number_of_Births />
+							<Number_of_Deaths />
+							<Number_of_Movements />
+							<Number_of_Big_Bellies />
+							<Label_BigBellyFormUse />
+							<Number_of_Infants />
+							<Label_InfantFormUse />
+						</Population_Tracking>
+						<Home_Visit_Scores>
+							<HomeVisits />
+							<ODK-RV_Ebola_Score />
+							<ODK-BigBelly />
+							<ODK-ICCM_Score />
+							<ODK-InfantTracking_Score />
+							<ODK-WellChild_Score />
+							<ODK-FamilyPlanning_Score />
+							<ODK-WellAdult_Score />
+						</Home_Visit_Scores>
+						<Teaching_Method />
+						<AncInfo>
+							<ODK-BirthsInMonth />
+							<ODK-NumberOfBirths />
+							<ODK-HomeBirths />
+							<ODK-FacilityBirths />
+							<ODK-NoANCVisits />
+							<ODK-1to3ANCVisits />
+							<ODK-4OrMoreANCVisits />
+						</AncInfo>
+					</FHW_Present>
+					<CHC_Checklist>
+						<ODK-CheckIn_Completed />
+						<Label_NoCHCMember />
+						<ODK-CAP_Completed />
+						<ODK-NumberofCHCMeetings />
+						<ODK-NumberOfCommunityMeetings />
+						<ODK-NumberOfBigBellies />
+						<ODK-NumberOfInfants />
+						<ODK-NumberOfDeaths />
+					</CHC_Checklist>
+					<Audit>
+						<ODK-AuditDate />
+						<ODK-Visit_Type />
+						<ODK-Audit_MemberID />
+						<ODK-AuditCorrectTreatment />
+					</Audit>
+					<ODK-RestockWeek />
+					<Label-Restock />
+				</data>
+			</instance>
+			<bind nodeset="/data/Basic_Info" />
+			<bind nodeset="/data/Basic_Info/ODK-FHW_ID" type="xsd:string" constraint="string-length(.) &lt;= 3" jr:constraintMsg="jr:itext('Basic_Info/ODK-FHW_ID-constraintMsg')" required="true()" />
+			<bind nodeset="/data/Basic_Info/ODK-Date" relevant="/data/Basic_Info/ODK-FHW_ID &gt; 0" />
+			<bind nodeset="/data/Basic_Info/ODK-FHW_Present" required="true()" />
+			<bind nodeset="/data/FHW_Not_Present" relevant="/data/Basic_Info/ODK-FHW_Present = '0'" />
+			<bind nodeset="/data/FHW_Not_Present/ODK-ExcusedAbsence" relevant="/data/Basic_Info/ODK-FHW_Present = '0'" required="true()" />
+			<bind nodeset="/data/FHW_Not_Present/ODK-WarningLetter" relevant="/data/FHW_Not_Present/ODK-ExcusedAbsence = '0'" required="true()" />
+			<bind nodeset="/data/FHW_Not_Present/ODK-Probation" relevant="/data/FHW_Not_Present/ODK-WarningLetter = '0'" required="true()" />
+			<bind nodeset="/data/FHW_Not_Present/ODK-Termination" relevant="/data/FHW_Not_Present/ODK-Probation = '0'" required="true()" />
+			<bind nodeset="/data/FHW_Present" relevant="/data/Basic_Info/ODK-FHW_Present = '1'" />
+			<bind nodeset="/data/FHW_Present/Population_Tracking" />
+			<bind nodeset="/data/FHW_Present/Population_Tracking/Number_of_Births" type="xsd:int" required="true()" />
+			<bind nodeset="/data/FHW_Present/Population_Tracking/Number_of_Deaths" type="xsd:int" required="true()" />
+			<bind nodeset="/data/FHW_Present/Population_Tracking/Number_of_Movements" type="xsd:int" required="true()" />
+			<bind nodeset="/data/FHW_Present/Population_Tracking/Number_of_Big_Bellies" type="xsd:int" required="true()" />
+			<bind nodeset="/data/FHW_Present/Population_Tracking/Label_BigBellyFormUse" relevant="/data/FHW_Present/Population_Tracking/Number_of_Big_Bellies &gt; 0" required="true()" />
+			<bind nodeset="/data/FHW_Present/Population_Tracking/Number_of_Infants" type="xsd:int" required="true()" />
+			<bind nodeset="/data/FHW_Present/Population_Tracking/Label_InfantFormUse" relevant="/data/FHW_Present/Population_Tracking/Number_of_Infants &gt; 0" required="true()" />
+			<bind nodeset="/data/FHW_Present/Home_Visit_Scores" />
+			<bind nodeset="/data/FHW_Present/Home_Visit_Scores/HomeVisits" constraint="not(selected(., &quot;none_A8&quot;)) or count-selected(.) &lt; 2" />
+			<bind nodeset="/data/FHW_Present/Home_Visit_Scores/ODK-RV_Ebola_Score" type="xsd:int" relevant="selected(/data/FHW_Present/Home_Visit_Scores/HomeVisits, 'RVEbola_A1')" required="true()" />
+			<bind nodeset="/data/FHW_Present/Home_Visit_Scores/ODK-BigBelly" type="xsd:int" relevant="selected(/data/FHW_Present/Home_Visit_Scores/HomeVisits, 'BigBelly_A2')" required="true()" />
+			<bind nodeset="/data/FHW_Present/Home_Visit_Scores/ODK-ICCM_Score" type="xsd:int" relevant="selected(/data/FHW_Present/Home_Visit_Scores/HomeVisits, 'ICCM_A3')" required="true()" />
+			<bind nodeset="/data/FHW_Present/Home_Visit_Scores/ODK-InfantTracking_Score" type="xsd:int" relevant="selected(/data/FHW_Present/Home_Visit_Scores/HomeVisits, 'InfantTrack_A4')" required="true()" />
+			<bind nodeset="/data/FHW_Present/Home_Visit_Scores/ODK-WellChild_Score" type="xsd:int" relevant="selected(/data/FHW_Present/Home_Visit_Scores/HomeVisits, 'WellChild_A5')" required="true()" />
+			<bind nodeset="/data/FHW_Present/Home_Visit_Scores/ODK-FamilyPlanning_Score" type="xsd:int" relevant="selected(/data/FHW_Present/Home_Visit_Scores/HomeVisits, 'FamilyPlanning_A6')" required="true()" />
+			<bind nodeset="/data/FHW_Present/Home_Visit_Scores/ODK-WellAdult_Score" type="xsd:int" relevant="selected(/data/FHW_Present/Home_Visit_Scores/HomeVisits, 'WellAdult_A7')" required="true()" />
+			<bind nodeset="/data/FHW_Present/Teaching_Method" required="true()" />
+			<bind nodeset="/data/FHW_Present/AncInfo" />
+			<bind nodeset="/data/FHW_Present/AncInfo/ODK-BirthsInMonth" required="true()" />
+			<bind nodeset="/data/FHW_Present/AncInfo/ODK-NumberOfBirths" type="xsd:int" relevant="/data/FHW_Present/AncInfo/ODK-BirthsInMonth = '1'" required="true()" />
+			<bind nodeset="/data/FHW_Present/AncInfo/ODK-HomeBirths" type="xsd:int" relevant="/data/FHW_Present/AncInfo/ODK-BirthsInMonth = '1'" required="true()" />
+			<bind nodeset="/data/FHW_Present/AncInfo/ODK-FacilityBirths" type="xsd:int" relevant="/data/FHW_Present/AncInfo/ODK-BirthsInMonth = '1'" required="true()" />
+			<bind nodeset="/data/FHW_Present/AncInfo/ODK-NoANCVisits" type="xsd:int" relevant="/data/FHW_Present/AncInfo/ODK-BirthsInMonth = '1'" required="true()" />
+			<bind nodeset="/data/FHW_Present/AncInfo/ODK-1to3ANCVisits" type="xsd:int" relevant="/data/FHW_Present/AncInfo/ODK-BirthsInMonth = '1'" required="true()" />
+			<bind nodeset="/data/FHW_Present/AncInfo/ODK-4OrMoreANCVisits" type="xsd:int" relevant="/data/FHW_Present/AncInfo/ODK-BirthsInMonth = '1'" required="true()" />
+			<bind nodeset="/data/CHC_Checklist" />
+			<bind nodeset="/data/CHC_Checklist/ODK-CheckIn_Completed" required="true()" />
+			<bind nodeset="/data/CHC_Checklist/Label_NoCHCMember" relevant="/data/CHC_Checklist/ODK-CheckIn_Completed = '0'" required="true()" />
+			<bind nodeset="/data/CHC_Checklist/ODK-CAP_Completed" relevant="/data/CHC_Checklist/ODK-CheckIn_Completed = '1'" required="true()" />
+			<bind nodeset="/data/CHC_Checklist/ODK-NumberofCHCMeetings" type="xsd:int" relevant="/data/CHC_Checklist/ODK-CheckIn_Completed = '1'" required="true()" />
+			<bind nodeset="/data/CHC_Checklist/ODK-NumberOfCommunityMeetings" type="xsd:int" relevant="/data/CHC_Checklist/ODK-CheckIn_Completed = '1'" required="true()" />
+			<bind nodeset="/data/CHC_Checklist/ODK-NumberOfBigBellies" type="xsd:int" relevant="/data/CHC_Checklist/ODK-CheckIn_Completed = '1'" required="true()" />
+			<bind nodeset="/data/CHC_Checklist/ODK-NumberOfInfants" type="xsd:int" relevant="/data/CHC_Checklist/ODK-CheckIn_Completed = '1'" required="true()" />
+			<bind nodeset="/data/CHC_Checklist/ODK-NumberOfDeaths" type="xsd:int" relevant="/data/CHC_Checklist/ODK-CheckIn_Completed = '1'" required="true()" />
+			<bind nodeset="/data/Audit" relevant="/data/Basic_Info/ODK-FHW_Present = '1'" />
+			<bind nodeset="/data/Audit/ODK-AuditDate" type="xsd:date" constraint=". &gt; today() - 30 and . &lt;= today()" jr:constraintMsg="jr:itext('FHW_Present/Audit/ODK-AuditDate-constraintMsg')" required="true()" />
+			<bind nodeset="/data/Audit/ODK-Visit_Type" required="true()" />
+			<bind nodeset="/data/Audit/ODK-Audit_MemberID" type="xsd:string" required="true()" />
+			<bind nodeset="/data/Audit/ODK-AuditCorrectTreatment" required="true()" />
+			<bind nodeset="/data/ODK-RestockWeek" relevant="/data/Basic_Info/ODK-FHW_Present = '1'" required="true()" />
+			<bind nodeset="/data/Label-Restock" relevant="/data/ODK-RestockWeek = '1'" required="true()" />
+			<itext>
+				<translation lang="en" default="">
+					<text id="Basic_Info-label">
+						<value>Basic Info</value>
+					</text>
+					<text id="ODK-FHW_ID-label">
+						<value>Please enter the FHW - ID Number</value>
+					</text>
+					<text id="Basic_Info/ODK-FHW_ID-constraintMsg">
+						<value>Please double check the FHW ID number</value>
+					</text>
+					<text id="ODK-FHW_Present-label">
+						<value>Is the FHW present?</value>
+					</text>
+					<text id="ODK-FHW_Present-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="ODK-FHW_Present-0-label">
+						<value>No</value>
+					</text>
+					<text id="FHW_Not_Present-label">
+						<value>FHW Not Present</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-ExcusedAbsence-label">
+						<value>Is the FHW excused to be absent? </value>
+					</text>
+					<text id="FHW_Not_Present/ODK-ExcusedAbsence-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-ExcusedAbsence-0-label">
+						<value>No</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-WarningLetter-label">
+						<value>Was a warning letter prepared?</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-WarningLetter-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-WarningLetter-0-label">
+						<value>No</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-Probation-label">
+						<value>Was a probation letter prepared?</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-Probation-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-Probation-0-label">
+						<value>No</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-Termination-label">
+						<value>Was a termination letter prepared?</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-Termination-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="FHW_Not_Present/ODK-Termination-0-label">
+						<value>No</value>
+					</text>
+					<text id="FHW_Present-label">
+						<value>FHW Present </value>
+					</text>
+					<text id="FHW_Present/Population_Tracking-label">
+						<value>Population_Tracking</value>
+					</text>
+					<text id="FHW_Present/Population_Tracking/Number_of_Births-label">
+						<value>Number of births?</value>
+					</text>
+					<text id="FHW_Present/Population_Tracking/Number_of_Deaths-label">
+						<value>Number of deaths?</value>
+					</text>
+					<text id="FHW_Present/Population_Tracking/Number_of_Movements-label">
+						<value>Number of Movements?</value>
+					</text>
+					<text id="FHW_Present/Population_Tracking/Number_of_Big_Bellies-label">
+						<value>Number of big bellies</value>
+					</text>
+					<text id="FHW_Present/Population_Tracking/Label_BigBellyFormUse-label">
+						<value>Please make sure you are using the big belly form for each woman</value>
+					</text>
+					<text id="FHW_Present/Population_Tracking/Number_of_Infants-label">
+						<value>Number of Infants?</value>
+					</text>
+					<text id="FHW_Present/Population_Tracking/Label_InfantFormUse-label">
+						<value>Please make sure you are using the infant tracking form for each infant</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores-label">
+						<value>Home_Visit_Scores</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/HomeVisits-label">
+						<value>Which kinds of home visit did you conduct?</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/HomeVisits-RVEbola_A1-label">
+						<value>RV/Ebola Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/HomeVisits-BigBelly_A2-label">
+						<value>Big Belly Track Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/HomeVisits-ICCM_A3-label">
+						<value>ICCM Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/HomeVisits-InfantTrack_A4-label">
+						<value>Infant Track Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/HomeVisits-WellChild_A5-label">
+						<value>Well Child Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/HomeVisits-FamilyPlanning_A6-label">
+						<value>Family Planning Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/HomeVisits-WellAdult_A7-label">
+						<value>Well Adult Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/HomeVisits-none_A8-label">
+						<value>Did not perform a visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/ODK-RV_Ebola_Score-label">
+						<value>RV/Ebola home visit score:</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/ODK-BigBelly-label">
+						<value>Big belly track home visit score:</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/ODK-ICCM_Score-label">
+						<value>ICCM home visit score:</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/ODK-InfantTracking_Score-label">
+						<value>Infant track home visit score:</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/ODK-WellChild_Score-label">
+						<value>Well child home visit score:</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/ODK-FamilyPlanning_Score-label">
+						<value>Family planning home visit score:</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/ODK-WellAdult_Score-label">
+						<value>Well adult home visit score:</value>
+					</text>
+					<text id="FHW_Present/Teaching_Method/Teaching_Method-label">
+						<value>What was your teaching method? (More than one can be selected)</value>
+					</text>
+					<text id="FHW_Present/Teaching_Method/Teaching_Metho-item1-label">
+						<value>Role Play</value>
+					</text>
+					<text id="FHW_Present/Teaching_Method/Teaching_Method-RoleModel_A2-label">
+						<value>Role Model</value>
+					</text>
+					<text id="FHW_Present/Teaching_Method/Teaching_Method-Drill_A3-label">
+						<value>Drill</value>
+					</text>
+					<text id="FHW_Present/Teaching_Method/Teaching_Method-JointProblemSolving_A4-label">
+						<value>Joint Problem Solving</value>
+					</text>
+					<text id="FHW_Present/AncInfo-label">
+						<value>ANC Information</value>
+					</text>
+					<text id="FHW_Present/ODK-BirthsInMonth-label">
+						<value>In the last month, did any woman give birth?</value>
+					</text>
+					<text id="FHW_Present/ODK-BirthsInMonth-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="FHW_Present/ODK-BirthsInMonth-0-label">
+						<value>No</value>
+					</text>
+					<text id="FHW_Present/AncInfo/ODK-NumberOfBirths-label">
+						<value>How many births in the last month?</value>
+					</text>
+					<text id="FHW_Present/AncInfo/ODK-HomeBirths-label">
+						<value>How many births were home births?</value>
+					</text>
+					<text id="FHW_Present/AncInfo/ODK-FacilityBirths-label">
+						<value>How many births were done in a health facility? </value>
+					</text>
+					<text id="FHW_Present/AncInfo/ODK-NoANCVisits-label">
+						<value>How many had no ANC visits?</value>
+					</text>
+					<text id="FHW_Present/AncInfo/ODK-1to3ANCVisits-label">
+						<value>How many had 1-3 ANC visits?</value>
+					</text>
+					<text id="FHW_Present/AncInfo/ODK-4OrMoreANCVisits-label">
+						<value>How many had 4 or more ANC visits?</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist-label">
+						<value>CHC Checklist</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-CheckIn_Completed-label">
+						<value>Have you found a CHC member to check in with?</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-CheckIn_Completed-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-CheckIn_Completed-0-label">
+						<value>No</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/Label_NoCHCMember-label">
+						<value>Please leave a note for a CHC member to meet you at next week's supervision visit</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-CAP_Completed-label">
+						<value>Has CAP been completed?</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-CAP_Completed-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-CAP_Completed-0-label">
+						<value>No</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-NumberofCHCMeetings-label">
+						<value>How many CHC meetings have been held in the past 7 days?</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-NumberOfCommunityMeetings-label">
+						<value>How many Community meetings have been held in the past 7 days?</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-NumberOfBigBellies-label">
+						<value>How many big bellies have been found in the past 7 days?</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-NumberOfInfants-label">
+						<value>How many infants are in the community now?</value>
+					</text>
+					<text id="FHW_Present/CHC_Checklist/ODK-NumberOfDeaths-label">
+						<value>How many deaths have there been in the past 7 days?</value>
+					</text>
+					<text id="FHW_Present/Audit-label">
+						<value>Audit</value>
+					</text>
+					<text id="FHW_Present/Audit/ODK-AuditDate-label">
+						<value>Please enter the date of the audit:</value>
+					</text>
+					<text id="FHW_Present/Audit/ODK-AuditDate-constraintMsg">
+						<value>Please make sure the audit is of a visit taking place a month within today</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-label">
+						<value>What type of audit is this?</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-RVEbola_A1-label">
+						<value>RV/Ebola Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-BigBelly_A2-label">
+						<value>Big Belly Track Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-ICCM_A3-label">
+						<value>ICCM Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-InfantTrack_A4-label">
+						<value>Infant Track Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-WellChild_A5-label">
+						<value>Well Child Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-FamilyPlanning_A6-label">
+						<value>Family Planning Home Visit</value>
+					</text>
+					<text id="FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-WellAdult_A7-label">
+						<value>Well Adult Home Visit</value>
+					</text>
+					<text id="FHW_Present/Audit/ODK-Audit_MemberID-label">
+						<value>Please enter the audited patient's Full Member ID: (enter without dash)</value>
+					</text>
+					<text id="FHW_Present/Audit/ODK-AuditCorrectTreatment-label">
+						<value>Was the correct treatment given to the patient?</value>
+					</text>
+					<text id="FHW_Present/Audit/ODK-AuditCorrectTreatment-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="FHW_Present/Audit/ODK-AuditCorrectTreatment-0-label">
+						<value>No</value>
+					</text>
+					<text id="FHW_Present/ODK-RestockWeek-label">
+						<value>Is it a restock week?</value>
+					</text>
+					<text id="FHW_Present/ODK-RestockWeek-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="FHW_Present/ODK-RestockWeek-0-label">
+						<value>No</value>
+					</text>
+					<text id="FHW_Present/Label-Restock-label">
+						<value>Please complete the "FHW Restock Form"</value>
+					</text>
+				</translation>
+			</itext>
+		</model>
+	</h:head>
+	<h:body>
+		<group ref="/data/Basic_Info">
+			<label ref="jr:itext('Basic_Info-label')" />
+			<input ref="/data/Basic_Info/ODK-FHW_ID" appearance="numeric">
+				<label ref="jr:itext('ODK-FHW_ID-label')" />
+			</input>
+			<select1 ref="/data/Basic_Info/ODK-FHW_Present">
+				<label ref="jr:itext('ODK-FHW_Present-label')" />
+				<item>
+					<label ref="jr:itext('ODK-FHW_Present-1-label')" />
+					<value>1</value>
+				</item>
+				<item>
+					<label ref="jr:itext('ODK-FHW_Present-0-label')" />
+					<value>0</value>
+				</item>
+			</select1>
+		</group>
+		<group ref="/data/FHW_Not_Present">
+			<label ref="jr:itext('FHW_Not_Present-label')" />
+			<select1 ref="/data/FHW_Not_Present/ODK-ExcusedAbsence">
+				<label ref="jr:itext('FHW_Not_Present/ODK-ExcusedAbsence-label')" />
+				<item>
+					<label ref="jr:itext('FHW_Not_Present/ODK-ExcusedAbsence-1-label')" />
+					<value>1</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Not_Present/ODK-ExcusedAbsence-0-label')" />
+					<value>0</value>
+				</item>
+			</select1>
+			<select1 ref="/data/FHW_Not_Present/ODK-WarningLetter">
+				<label ref="jr:itext('FHW_Not_Present/ODK-WarningLetter-label')" />
+				<item>
+					<label ref="jr:itext('FHW_Not_Present/ODK-WarningLetter-1-label')" />
+					<value>1</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Not_Present/ODK-WarningLetter-0-label')" />
+					<value>0</value>
+				</item>
+			</select1>
+			<select1 ref="/data/FHW_Not_Present/ODK-Probation">
+				<label ref="jr:itext('FHW_Not_Present/ODK-Probation-label')" />
+				<item>
+					<label ref="jr:itext('FHW_Not_Present/ODK-Probation-1-label')" />
+					<value>1</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Not_Present/ODK-Probation-0-label')" />
+					<value>0</value>
+				</item>
+			</select1>
+			<select1 ref="/data/FHW_Not_Present/ODK-Termination">
+				<label ref="jr:itext('FHW_Not_Present/ODK-Termination-label')" />
+				<item>
+					<label ref="jr:itext('FHW_Not_Present/ODK-Termination-1-label')" />
+					<value>1</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Not_Present/ODK-Termination-0-label')" />
+					<value>0</value>
+				</item>
+			</select1>
+		</group>
+		<group ref="/data/FHW_Present">
+			<label ref="jr:itext('FHW_Present-label')" />
+			<group ref="/data/FHW_Present/Population_Tracking">
+				<label ref="jr:itext('FHW_Present/Population_Tracking-label')" />
+				<input ref="/data/FHW_Present/Population_Tracking/Number_of_Births">
+					<label ref="jr:itext('FHW_Present/Population_Tracking/Number_of_Births-label')" />
+				</input>
+				<input ref="/data/FHW_Present/Population_Tracking/Number_of_Deaths">
+					<label ref="jr:itext('FHW_Present/Population_Tracking/Number_of_Deaths-label')" />
+				</input>
+				<input ref="/data/FHW_Present/Population_Tracking/Number_of_Movements">
+					<label ref="jr:itext('FHW_Present/Population_Tracking/Number_of_Movements-label')" />
+				</input>
+				<input ref="/data/FHW_Present/Population_Tracking/Number_of_Big_Bellies">
+					<label ref="jr:itext('FHW_Present/Population_Tracking/Number_of_Big_Bellies-label')" />
+				</input>
+				<trigger ref="/data/FHW_Present/Population_Tracking/Label_BigBellyFormUse" appearance="minimal">
+					<label ref="jr:itext('FHW_Present/Population_Tracking/Label_BigBellyFormUse-label')" />
+				</trigger>
+				<input ref="/data/FHW_Present/Population_Tracking/Number_of_Infants">
+					<label ref="jr:itext('FHW_Present/Population_Tracking/Number_of_Infants-label')" />
+				</input>
+				<trigger ref="/data/FHW_Present/Population_Tracking/Label_InfantFormUse" appearance="minimal">
+					<label ref="jr:itext('FHW_Present/Population_Tracking/Label_InfantFormUse-label')" />
+				</trigger>
+			</group>
+			<group ref="/data/FHW_Present/Home_Visit_Scores">
+				<label ref="jr:itext('FHW_Present/Home_Visit_Scores-label')" />
+				<select ref="/data/FHW_Present/Home_Visit_Scores/HomeVisits">
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/HomeVisits-label')" />
+					<item>
+						<label ref="jr:itext('FHW_Present/Home_Visit_Scores/HomeVisits-RVEbola_A1-label')" />
+						<value>RVEbola_A1</value>
+					</item>
+					<item>
+						<label ref="jr:itext('FHW_Present/Home_Visit_Scores/HomeVisits-BigBelly_A2-label')" />
+						<value>BigBelly_A2</value>
+					</item>
+					<item>
+						<label ref="jr:itext('FHW_Present/Home_Visit_Scores/HomeVisits-ICCM_A3-label')" />
+						<value>ICCM_A3</value>
+					</item>
+					<item>
+						<label ref="jr:itext('FHW_Present/Home_Visit_Scores/HomeVisits-InfantTrack_A4-label')" />
+						<value>InfantTrack_A4</value>
+					</item>
+					<item>
+						<label ref="jr:itext('FHW_Present/Home_Visit_Scores/HomeVisits-WellChild_A5-label')" />
+						<value>WellChild_A5</value>
+					</item>
+					<item>
+						<label ref="jr:itext('FHW_Present/Home_Visit_Scores/HomeVisits-FamilyPlanning_A6-label')" />
+						<value>FamilyPlanning_A6</value>
+					</item>
+					<item>
+						<label ref="jr:itext('FHW_Present/Home_Visit_Scores/HomeVisits-WellAdult_A7-label')" />
+						<value>WellAdult_A7</value>
+					</item>
+					<item>
+						<label ref="jr:itext('FHW_Present/Home_Visit_Scores/HomeVisits-none_A8-label')" />
+						<value>none_A8</value>
+					</item>
+				</select>
+				<input ref="/data/FHW_Present/Home_Visit_Scores/ODK-RV_Ebola_Score">
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/ODK-RV_Ebola_Score-label')" />
+				</input>
+				<input ref="/data/FHW_Present/Home_Visit_Scores/ODK-BigBelly">
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/ODK-BigBelly-label')" />
+				</input>
+				<input ref="/data/FHW_Present/Home_Visit_Scores/ODK-ICCM_Score">
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/ODK-ICCM_Score-label')" />
+				</input>
+				<input ref="/data/FHW_Present/Home_Visit_Scores/ODK-InfantTracking_Score">
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/ODK-InfantTracking_Score-label')" />
+				</input>
+				<input ref="/data/FHW_Present/Home_Visit_Scores/ODK-WellChild_Score">
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/ODK-WellChild_Score-label')" />
+				</input>
+				<input ref="/data/FHW_Present/Home_Visit_Scores/ODK-FamilyPlanning_Score">
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/ODK-FamilyPlanning_Score-label')" />
+				</input>
+				<input ref="/data/FHW_Present/Home_Visit_Scores/ODK-WellAdult_Score">
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/ODK-WellAdult_Score-label')" />
+				</input>
+			</group>
+			<select ref="/data/FHW_Present/Teaching_Method">
+				<label ref="jr:itext('FHW_Present/Teaching_Method/Teaching_Method-label')" />
+				<item>
+					<label ref="jr:itext('FHW_Present/Teaching_Method/Teaching_Metho-item1-label')" />
+					<value>RolePlay_A1</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/Teaching_Method/Teaching_Method-RoleModel_A2-label')" />
+					<value>RoleModel_A2</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/Teaching_Method/Teaching_Method-Drill_A3-label')" />
+					<value>Drill_A3</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/Teaching_Method/Teaching_Method-JointProblemSolving_A4-label')" />
+					<value>JointProblemSolving_A4</value>
+				</item>
+			</select>
+			<group ref="/data/FHW_Present/AncInfo">
+				<label ref="jr:itext('FHW_Present/AncInfo-label')" />
+				<select1 ref="/data/FHW_Present/AncInfo/ODK-BirthsInMonth">
+					<label ref="jr:itext('FHW_Present/ODK-BirthsInMonth-label')" />
+					<item>
+						<label ref="jr:itext('FHW_Present/ODK-BirthsInMonth-1-label')" />
+						<value>1</value>
+					</item>
+					<item>
+						<label ref="jr:itext('FHW_Present/ODK-BirthsInMonth-0-label')" />
+						<value>0</value>
+					</item>
+				</select1>
+				<input ref="/data/FHW_Present/AncInfo/ODK-NumberOfBirths">
+					<label ref="jr:itext('FHW_Present/AncInfo/ODK-NumberOfBirths-label')" />
+				</input>
+				<input ref="/data/FHW_Present/AncInfo/ODK-HomeBirths">
+					<label ref="jr:itext('FHW_Present/AncInfo/ODK-HomeBirths-label')" />
+				</input>
+				<input ref="/data/FHW_Present/AncInfo/ODK-FacilityBirths">
+					<label ref="jr:itext('FHW_Present/AncInfo/ODK-FacilityBirths-label')" />
+				</input>
+				<input ref="/data/FHW_Present/AncInfo/ODK-NoANCVisits">
+					<label ref="jr:itext('FHW_Present/AncInfo/ODK-NoANCVisits-label')" />
+				</input>
+				<input ref="/data/FHW_Present/AncInfo/ODK-1to3ANCVisits">
+					<label ref="jr:itext('FHW_Present/AncInfo/ODK-1to3ANCVisits-label')" />
+				</input>
+				<input ref="/data/FHW_Present/AncInfo/ODK-4OrMoreANCVisits">
+					<label ref="jr:itext('FHW_Present/AncInfo/ODK-4OrMoreANCVisits-label')" />
+				</input>
+			</group>
+		</group>
+		<group ref="/data/CHC_Checklist">
+			<label ref="jr:itext('FHW_Present/CHC_Checklist-label')" />
+			<select1 ref="/data/CHC_Checklist/ODK-CheckIn_Completed">
+				<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-CheckIn_Completed-label')" />
+				<item>
+					<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-CheckIn_Completed-1-label')" />
+					<value>1</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-CheckIn_Completed-0-label')" />
+					<value>0</value>
+				</item>
+			</select1>
+			<trigger ref="/data/CHC_Checklist/Label_NoCHCMember" appearance="minimal">
+				<label ref="jr:itext('FHW_Present/CHC_Checklist/Label_NoCHCMember-label')" />
+			</trigger>
+			<select1 ref="/data/CHC_Checklist/ODK-CAP_Completed">
+				<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-CAP_Completed-label')" />
+				<item>
+					<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-CAP_Completed-1-label')" />
+					<value>1</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-CAP_Completed-0-label')" />
+					<value>0</value>
+				</item>
+			</select1>
+			<input ref="/data/CHC_Checklist/ODK-NumberofCHCMeetings">
+				<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-NumberofCHCMeetings-label')" />
+			</input>
+			<input ref="/data/CHC_Checklist/ODK-NumberOfCommunityMeetings">
+				<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-NumberOfCommunityMeetings-label')" />
+			</input>
+			<input ref="/data/CHC_Checklist/ODK-NumberOfBigBellies">
+				<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-NumberOfBigBellies-label')" />
+			</input>
+			<input ref="/data/CHC_Checklist/ODK-NumberOfInfants">
+				<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-NumberOfInfants-label')" />
+			</input>
+			<input ref="/data/CHC_Checklist/ODK-NumberOfDeaths">
+				<label ref="jr:itext('FHW_Present/CHC_Checklist/ODK-NumberOfDeaths-label')" />
+			</input>
+		</group>
+		<group ref="/data/Audit">
+			<label ref="jr:itext('FHW_Present/Audit-label')" />
+			<input ref="/data/Audit/ODK-AuditDate">
+				<label ref="jr:itext('FHW_Present/Audit/ODK-AuditDate-label')" />
+			</input>
+			<select1 ref="/data/Audit/ODK-Visit_Type">
+				<label ref="jr:itext('FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-label')" />
+				<item>
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-RVEbola_A1-label')" />
+					<value>RVEbola_A1</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-BigBelly_A2-label')" />
+					<value>BigBelly_A2</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-ICCM_A3-label')" />
+					<value>ICCM_A3</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-InfantTrack_A4-label')" />
+					<value>InfantTrack_A4</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-WellChild_A5-label')" />
+					<value>WellChild_A5</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-FamilyPlanning_A6-label')" />
+					<value>FamilyPlanning_A6</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/Home_Visit_Scores/copy-1-of-HomeVisits-WellAdult_A7-label')" />
+					<value>WellAdult_A7</value>
+				</item>
+			</select1>
+			<input ref="/data/Audit/ODK-Audit_MemberID" appearance="numeric">
+				<label ref="jr:itext('FHW_Present/Audit/ODK-Audit_MemberID-label')" />
+			</input>
+			<select1 ref="/data/Audit/ODK-AuditCorrectTreatment">
+				<label ref="jr:itext('FHW_Present/Audit/ODK-AuditCorrectTreatment-label')" />
+				<item>
+					<label ref="jr:itext('FHW_Present/Audit/ODK-AuditCorrectTreatment-1-label')" />
+					<value>1</value>
+				</item>
+				<item>
+					<label ref="jr:itext('FHW_Present/Audit/ODK-AuditCorrectTreatment-0-label')" />
+					<value>0</value>
+				</item>
+			</select1>
+		</group>
+		<select1 ref="/data/ODK-RestockWeek">
+			<label ref="jr:itext('FHW_Present/ODK-RestockWeek-label')" />
+			<item>
+				<label ref="jr:itext('FHW_Present/ODK-RestockWeek-1-label')" />
+				<value>1</value>
+			</item>
+			<item>
+				<label ref="jr:itext('FHW_Present/ODK-RestockWeek-0-label')" />
+				<value>0</value>
+			</item>
+		</select1>
+		<trigger ref="/data/Label-Restock" appearance="minimal">
+			<label ref="jr:itext('FHW_Present/Label-Restock-label')" />
+		</trigger>
+	</h:body>
+</h:html>

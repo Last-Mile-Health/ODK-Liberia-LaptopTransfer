@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<h:html xmlns:h="http://www.w3.org/1999/xhtml" xmlns:orx="http://openrosa.org/jr/xforms" xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:vellum="http://commcarehq.org/xforms/vellum">
+	<h:head>
+		<h:title>Arrival Check Log</h:title>
+		<model>
+			<instance>
+				<data xmlns:jrm="http://dev.commcarehq.org/jr/xforms" xmlns="http://openrosa.org/formdesigner/59D8E4CD-AD83-4A82-B600-B915CB557994" uiVersion="1" version="1" name="Arrival Check Log">
+					<LMD-TABLE />
+					<LMD-VAL-FHWID />
+					<LMD-DAT-ManualDate />
+					<LMD-TIM-TimeOfArrival />
+					<LMD-VAL-KmTraveled />
+					<LMD-VAL-FieldEmergencies />
+					<Label_ReportEmergency />
+					<LMD-VAL-Maintenance />
+					<Label_ReportMaintenance />
+				</data>
+			</instance>
+			<bind nodeset="/data/LMD-TABLE" calculate="&quot;tbl_data_odk_preDepartureChecklist&quot;" />
+			<bind nodeset="/data/LMD-VAL-FHWID" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-DAT-ManualDate" type="xsd:date" required="true()" />
+			<bind nodeset="/data/LMD-TIM-TimeOfArrival" type="xsd:time" required="true()" />
+			<bind nodeset="/data/LMD-VAL-KmTraveled" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-VAL-FieldEmergencies" required="true()" />
+			<bind nodeset="/data/Label_ReportEmergency" relevant="/data/LMD-VAL-FieldEmergencies = '1'" required="true()" />
+			<bind nodeset="/data/LMD-VAL-Maintenance" required="true()" />
+			<bind nodeset="/data/Label_ReportMaintenance" relevant="/data/LMD-VAL-Maintenance = '1'" required="true()" />
+			<itext>
+				<translation lang="en" default="">
+					<text id="LMD-VAL-FHWID-label">
+						<value>Enter your FHW ID#:</value>
+					</text>
+					<text id="LMD-DAT-ManualDate-label">
+						<value>Please enter today's date:</value>
+					</text>
+					<text id="LMD-TIM-TimeOfArrival-label">
+						<value>What time did you arrive at your destination?</value>
+					</text>
+					<text id="LMD-VAL-KmTraveled-label">
+						<value>How many Kilometers did you travel?</value>
+					</text>
+					<text id="LMD-VAL-FieldEmergencies-label">
+						<value>Were there any emergencies in the field?</value>
+					</text>
+					<text id="LMD-VAL-FieldEmergencies-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="LMD-VAL-FieldEmergencies-0-label">
+						<value>No</value>
+					</text>
+					<text id="Label_ReportEmergency-label">
+						<value>Please report the emergency to the health facility, site manager, and clinical mentor</value>
+					</text>
+					<text id="LMD-VAL-Maintenance-label">
+						<value>Any maintenance issue reported?</value>
+					</text>
+					<text id="LMD-VAL-Maintenance-1-label">
+						<value>Yes</value>
+					</text>
+					<text id="LMD-VAL-Maintenance-0-label">
+						<value>No</value>
+					</text>
+					<text id="Label_ReportMaintenance-label">
+						<value>Please notify the site manager and mechanic of the maintenance issue</value>
+					</text>
+				</translation>
+			</itext>
+		</model>
+	</h:head>
+	<h:body>
+		<input ref="/data/LMD-VAL-FHWID">
+			<label ref="jr:itext('LMD-VAL-FHWID-label')" />
+		</input>
+		<input ref="/data/LMD-DAT-ManualDate">
+			<label ref="jr:itext('LMD-DAT-ManualDate-label')" />
+		</input>
+		<input ref="/data/LMD-TIM-TimeOfArrival">
+			<label ref="jr:itext('LMD-TIM-TimeOfArrival-label')" />
+		</input>
+		<input ref="/data/LMD-VAL-KmTraveled">
+			<label ref="jr:itext('LMD-VAL-KmTraveled-label')" />
+		</input>
+		<select1 ref="/data/LMD-VAL-FieldEmergencies">
+			<label ref="jr:itext('LMD-VAL-FieldEmergencies-label')" />
+			<item>
+				<label ref="jr:itext('LMD-VAL-FieldEmergencies-1-label')" />
+				<value>1</value>
+			</item>
+			<item>
+				<label ref="jr:itext('LMD-VAL-FieldEmergencies-0-label')" />
+				<value>0</value>
+			</item>
+		</select1>
+		<trigger ref="/data/Label_ReportEmergency" appearance="minimal">
+			<label ref="jr:itext('Label_ReportEmergency-label')" />
+		</trigger>
+		<select1 ref="/data/LMD-VAL-Maintenance">
+			<label ref="jr:itext('LMD-VAL-Maintenance-label')" />
+			<item>
+				<label ref="jr:itext('LMD-VAL-Maintenance-1-label')" />
+				<value>1</value>
+			</item>
+			<item>
+				<label ref="jr:itext('LMD-VAL-Maintenance-0-label')" />
+				<value>0</value>
+			</item>
+		</select1>
+		<trigger ref="/data/Label_ReportMaintenance" appearance="minimal">
+			<label ref="jr:itext('Label_ReportMaintenance-label')" />
+		</trigger>
+	</h:body>
+</h:html>
+
+<LMD_delimiter>
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<h:html xmlns:h="http://www.w3.org/1999/xhtml" xmlns:orx="http://openrosa.org/jr/xforms" xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:vellum="http://commcarehq.org/xforms/vellum">
+	<h:head>
+		<h:title>Birth Tracker</h:title>
+		<model>
+			<instance>
+				<data xmlns:jrm="http://dev.commcarehq.org/jr/xforms" xmlns="http://openrosa.org/formdesigner/CD073D9A-8AF2-48B2-81BE-020BB890563C" uiVersion="1" version="1" name="Birth Tracker">
+					<LMD-TABLE />
+					<LMD-VAL-FHWID />
+					<LMD-DAT-AutoDate />
+					<LMD-VAL-MemberID />
+					<LMD-VAL-HHID />
+					<LMD-VAL-Name />
+					<LMD-VAL-Gender />
+					<LMD-DAT-DateOfBirth />
+				</data>
+			</instance>
+			<bind nodeset="/data/LMD-TABLE" calculate="&quot;tbl_data_odk_BirthTracker&quot;" />
+			<bind nodeset="/data/LMD-VAL-FHWID" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-DAT-AutoDate" calculate="now()" />
+			<bind nodeset="/data/LMD-VAL-MemberID" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-VAL-HHID" type="xsd:int" required="true()" />
+			<bind nodeset="/data/LMD-VAL-Name" type="xsd:string" required="true()" />
+			<bind nodeset="/data/LMD-VAL-Gender" required="true()" />
+			<bind nodeset="/data/LMD-DAT-DateOfBirth" type="xsd:date" constraint=". &lt; today()" jr:constraintMsg="jr:itext('LMD-DAT-DateOfBirth-constraintMsg')" required="true()" />
+			<itext>
+				<translation lang="en" default="">
+					<text id="LMD-VAL-FHWID-label">
+						<value>Enter your FHW ID#:</value>
+					</text>
+					<text id="LMD-VAL-MemberID-label">
+						<value>Please enter the Member ID:</value>
+					</text>
+					<text id="LMD-VAL-HHID-label">
+						<value>Please enter the Household ID:</value>
+					</text>
+					<text id="LMD-VAL-Name-label">
+						<value>Member Name:</value>
+					</text>
+					<text id="LMD-VAL-Gender-label">
+						<value>Sex:</value>
+					</text>
+					<text id="LMD-VAL-Gender-male-label">
+						<value>Male</value>
+					</text>
+					<text id="LMD-VAL-Gender-female-label">
+						<value>Female</value>
+					</text>
+					<text id="LMD-DAT-DateOfBirth-label">
+						<value>Date of Birth:</value>
+					</text>
+					<text id="LMD-DAT-DateOfBirth-constraintMsg">
+						<value>Birth must be before today</value>
+					</text>
+				</translation>
+			</itext>
+		</model>
+	</h:head>
+	<h:body>
+		<input ref="/data/LMD-VAL-FHWID">
+			<label ref="jr:itext('LMD-VAL-FHWID-label')" />
+		</input>
+		<input ref="/data/LMD-VAL-MemberID">
+			<label ref="jr:itext('LMD-VAL-MemberID-label')" />
+		</input>
+		<input ref="/data/LMD-VAL-HHID">
+			<label ref="jr:itext('LMD-VAL-HHID-label')" />
+		</input>
+		<input ref="/data/LMD-VAL-Name">
+			<label ref="jr:itext('LMD-VAL-Name-label')" />
+		</input>
+		<select1 ref="/data/LMD-VAL-Gender">
+			<label ref="jr:itext('LMD-VAL-Gender-label')" />
+			<item>
+				<label ref="jr:itext('LMD-VAL-Gender-male-label')" />
+				<value>male</value>
+			</item>
+			<item>
+				<label ref="jr:itext('LMD-VAL-Gender-female-label')" />
+				<value>female</value>
+			</item>
+		</select1>
+		<input ref="/data/LMD-DAT-DateOfBirth">
+			<label ref="jr:itext('LMD-DAT-DateOfBirth-label')" />
+		</input>
+	</h:body>
+</h:html>
